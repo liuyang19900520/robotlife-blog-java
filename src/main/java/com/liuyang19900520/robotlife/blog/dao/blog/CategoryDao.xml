@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liuyang19900520.robotlife.blog.dao.blog.CategoryDao">
+
+    <resultMap id="CategoryMap" type="com.liuyang19900520.robotlife.blog.domain.blog.Category">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="category_id" property="categoryId" jdbcType="BIGINT"/>
+        <id column="category_content" property="categoryContent" jdbcType="VARCHAR"/>
+        <id column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <id column="category_rank" property="categoryRank" jdbcType="BIGINT"/>
+        <id column="create_at" property="createAt" jdbcType="TIMESTAMP"/>
+        <id column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <id column="update_at" property="updateAt" jdbcType="TIMESTAMP"/>
+        <id column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <id column="delete_flag" property="deleteFlag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="BlogMap" type="com.liuyang19900520.robotlife.blog.domain.blog.Blog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="blog_id" property="blogId" jdbcType="BIGINT"/>
+        <id column="blog_title" property="blogTitle" jdbcType="VARCHAR"/>
+        <id column="blog_content" property="blogContent" jdbcType="LONGVARCHAR"/>
+        <id column="blog_html" property="blogHtml" jdbcType="LONGVARCHAR"/>
+        <id column="author_id" property="authorId" jdbcType="BIGINT"/>
+        <id column="create_at" property="createAt" jdbcType="TIMESTAMP"/>
+        <id column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <id column="update_at" property="updateAt" jdbcType="TIMESTAMP"/>
+        <id column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <id column="delete_flag" property="deleteFlag" jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="insertCategory">
+
+        INSERT INTO b_category (category_id, category_content, category_rank, parent_id, create_at, create_by, update_at, update_by, delete_flag) VALUES
+        (#{categoryId},#{categoryContent},#{categoryRank},#{parentId},CURRENT_TIME,#{createBy},CURRENT_TIME,#{updateBy},'0')
+    </insert>
+
+
+    <select id="selectGategories" resultMap="CategoryMap">
+        SELECT category_id,category_content,parent_id,category_rank FROM b_category
+    </select>
+
+    <select id="selectBolgTitlesByCategoryId" resultMap="BlogMap">
+
+        SELECT blog_id,blog_title FROM b_blog
+        WHERE category_id=#{categoryId}
+          ORDER by update_at DESC
+
+    </select>
+    <select id="selectMaxRank" resultType="java.lang.Integer">
+
+        select max(category_rank)
+        FROM b_category;
+
+    </select>
+
+
+</mapper>

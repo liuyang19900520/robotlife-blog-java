@@ -1,0 +1,16 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: robotlife-blog
+  redis:
+      host: 18.182.147.149
+      port: 6379
+      database: 0
+      lettuce:
+        pool:
+          max-active: 500
+          max-wait: 1ms
+          max-idle: 100
+          min-idle: 20

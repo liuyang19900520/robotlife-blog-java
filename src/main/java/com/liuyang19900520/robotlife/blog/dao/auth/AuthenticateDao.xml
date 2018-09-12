@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liuyang19900520.robotlife.blog.dao.auth.AuthenticateDao">
+
+    <resultMap id="UserMap" type="com.liuyang19900520.robotlife.blog.domain.user.SysUser">
+        <id property="id" column="id"></id>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="mobilePhone" column="mobile_phone"/>
+        <result property="avatar" column="avatar"/>
+        <result property="nickname" column="nickname"/>
+        <result property="email" column="email"/>
+
+
+        <result property="createAt" column="create_at"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateAt" column="update_at"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="deleteFlag" column="delete_flag"/>
+    </resultMap>
+
+
+    <select id="findAccount" resultMap="UserMap">
+        SELECT *
+        FROM sys_user
+        WHERE user_name = #{userName}
+
+    </select>
+
+
+    <select id="listRolesByAccount" resultType="java.lang.String">
+        SELECT r.code
+        FROM sys_role r
+        INNER JOIN sys_user_role ur ON r.id = ur.role_id
+        INNER JOIN sys_user u ON u.id = ur.user_id
+        WHERE u.user_name = #{userName}
+    </select>
+
+    <select id="listPermissionsByAccount" resultType="java.lang.String">
+        SELECT r.permission
+        FROM sys_resource r
+        INNER JOIN sys_role_resource rr ON r.id = rr.resource_id
+        INNER JOIN sys_role role ON rr.role_id = role.id
+        INNER JOIN sys_user_role ur ON ur.role_id = role.id
+        INNER JOIN sys_user u ON u.id = ur.user_id
+        WHERE u.user_name = #{userName}
+    </select>
+
+
+</mapper>

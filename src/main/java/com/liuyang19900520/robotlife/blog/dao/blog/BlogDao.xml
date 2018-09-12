@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liuyang19900520.robotlife.blog.dao.blog.BlogDao">
+
+    <resultMap id="BlogMap" type="com.liuyang19900520.robotlife.blog.domain.blog.Blog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="blog_id" property="blogId" jdbcType="BIGINT"/>
+        <result column="blog_title" property="blogTitle" jdbcType="VARCHAR"/>
+        <result column="blog_summary" property="blogSummary" jdbcType="LONGVARCHAR"/>
+        <result column="blog_content" property="blogContent" jdbcType="LONGVARCHAR"/>
+        <result column="blog_html" property="blogHtml" jdbcType="LONGVARCHAR"/>
+        <result column="tags" property="tags" jdbcType="VARCHAR"/>
+        <result column="category_id" property="categoryId" jdbcType="BIGINT"/>
+        <result column="topic_id" property="topicId" jdbcType="BIGINT"/>
+        <result column="author_id" property="authorId" jdbcType="BIGINT"/>
+        <result column="create_at" property="createAt" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_at" property="updateAt" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="TempBlogMap" type="com.liuyang19900520.robotlife.blog.domain.blog.Blog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="temp_blog_id" property="blogId" jdbcType="BIGINT"/>
+        <result column="temp_blog_title" property="blogTitle" jdbcType="VARCHAR"/>
+        <result column="temp_blog_content" property="blogContent" jdbcType="LONGVARCHAR"/>
+        <result column="temp_blog_html" property="blogHtml" jdbcType="LONGVARCHAR"/>
+        <result column="temp_tags" property="tags" jdbcType="VARCHAR"/>
+        <result column="temp_category_id" property="categoryId" jdbcType="BIGINT"/>
+        <result column="topic_id" property="topicId" jdbcType="BIGINT"/>
+        <result column="temp_author_id" property="authorId" jdbcType="BIGINT"/>
+        <result column="create_at" property="createAt" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_at" property="updateAt" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertBlog">
+        INSERT INTO b_blog
+        (blog_id, blog_title, blog_content, blog_summary,blog_html, author_id, tags,category_id,topic_id,create_at,create_by, update_at, update_by, delete_flag)
+        VALUES
+        (#{blogId},#{blogTitle},#{blogContent},#{blogSummary},#{blogHtml},#{authorId},#{tags},#{categoryId},#{topicId},CURRENT_TIME,#{authorId},CURRENT_TIME,#{authorId},'0')
+   ON DUPLICATE KEY UPDATE
+        blog_title=#{blogTitle},
+        blog_content=#{blogContent},
+        blog_html=#{blogHtml},
+        author_id=#{authorId},
+        tags=#{tags},
+        category_id=#{categoryId},
+        topic_id=#{topicId},
+        update_at=CURRENT_TIME,
+        update_by=#{authorId}
+    </insert>
+    <insert id="insertTempBlog">
+
+        INSERT INTO b_temp_blog
+        (temp_blog_id, temp_blog_title, temp_blog_content, temp_blog_html, temp_author_id, temp_tags,temp_category_id,temp_topic_id,create_at, create_by, update_at, update_by, delete_flag)
+        VALUES
+        (#{blogId},#{blogTitle},#{blogContent},#{blogHtml},#{authorId},#{tags},#{categoryId},#{topicId},CURRENT_TIME,#{authorId},CURRENT_TIME,#{authorId},'0')
+
+        ON DUPLICATE KEY UPDATE
+        temp_blog_title=#{blogTitle},
+        temp_blog_content=#{blogContent},
+        temp_blog_html=#{blogHtml},
+        temp_author_id=#{authorId},
+        temp_tags=#{tags},
+         temp_topic_id=#{topicId},
+        temp_category_id=#{categoryId},
+        update_at=CURRENT_TIME,
+        update_by=#{authorId}
+
+    </insert>
+    <delete id="deleteTempBlog">
+      DELETE FROM b_temp_blog WHERE temp_blog_id=#{blogId}
+    </delete>
+
+    <select id="selectBlogsByPage" resultMap="BlogMap">
+        SELECT
+        blog_id, blog_title, blog_summary,blog_content, blog_html, author_id, tags,create_at, create_by, update_at, update_by,
+        delete_flag
+        FROM b_blog
+        WHERE 1=1
+        <if test="topicId !=null and topicId !=''">
+            AND topic_id =#{topicId}
+        </if>
+        ORDER by update_at DESC
+    </select>
+
+    <select id="selectBlogByKey" resultMap="BlogMap">
+      SELECT
+       blog_id, blog_title, blog_summary,blog_content, blog_html, author_id,category_id,topic_id,tags, create_at, create_by, update_at, update_by, delete_flag
+       FROM  b_blog
+       WHERE blog_id=#{blogId}
+    </select>
+    <select id="selectTempBlogs" resultMap="TempBlogMap">
+
+        SELECT * FROM b_temp_blog
+
+    </select>
+    <select id="selectTempBlogByKey" resultMap="TempBlogMap">
+
+    SELECT
+    *
+    FROM  b_temp_blog
+    WHERE temp_blog_id=#{blogId}
+
+</select>
+
+</mapper>

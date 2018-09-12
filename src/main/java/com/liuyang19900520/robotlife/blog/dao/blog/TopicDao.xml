@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liuyang19900520.robotlife.blog.dao.blog.TopicDao">
+
+    <resultMap id="TopicMap" type="com.liuyang19900520.robotlife.blog.domain.blog.Topic">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="topic_id" property="topicId" jdbcType="BIGINT"/>
+        <id column="topic_content" property="topicContent" jdbcType="VARCHAR"/>
+        <id column="topic_rank" property="topicRank" jdbcType="BIGINT"/>
+        <id column="create_at" property="createAt" jdbcType="TIMESTAMP"/>
+        <id column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <id column="update_at" property="updateAt" jdbcType="TIMESTAMP"/>
+        <id column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <id column="delete_flag" property="deleteFlag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="BlogMap" type="com.liuyang19900520.robotlife.blog.domain.blog.Blog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="blog_id" property="blogId" jdbcType="BIGINT"/>
+        <id column="blog_title" property="blogTitle" jdbcType="VARCHAR"/>
+        <id column="blog_content" property="blogContent" jdbcType="LONGVARCHAR"/>
+        <id column="blog_html" property="blogHtml" jdbcType="LONGVARCHAR"/>
+        <id column="author_id" property="authorId" jdbcType="BIGINT"/>
+        <id column="create_at" property="createAt" jdbcType="TIMESTAMP"/>
+        <id column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <id column="update_at" property="updateAt" jdbcType="TIMESTAMP"/>
+        <id column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <id column="delete_flag" property="deleteFlag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="selectTopics" resultMap="TopicMap">
+        SELECT id,topic_id,topic_content, topic_rank FROM b_topic
+    </select>
+
+
+</mapper>
