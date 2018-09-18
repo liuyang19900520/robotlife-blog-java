@@ -22,7 +22,7 @@ public class BlogController {
 
 
     @PostMapping("/page")
-    @JSON(type = Blog.class, include = "blogId,blogTitle,blogSummary,authorId,tags,updateAt")
+    @JSON(type = Blog.class, include = "blogId,blogTitle,blogContent,authorId,tags,updateAt")
     public Object listBlogs(Blog blog, Integer pageNo, Integer rows) {
         return blogService.listBlgosByPage(blog, pageNo, rows);
     }
