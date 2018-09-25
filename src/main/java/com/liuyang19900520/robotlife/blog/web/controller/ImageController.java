@@ -1,8 +1,10 @@
-package com.liuyang19900520.robotlife.blog.web.controller.blog;
+package com.liuyang19900520.robotlife.blog.web.controller;
 
 
 import com.liuyang19900520.robotlife.blog.common.pojo.CommonRes;
+import com.liuyang19900520.robotlife.blog.common.util.LS3Utils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -16,7 +18,7 @@ import java.io.InputStream;
 import java.util.Iterator;
 
 @Controller
-@RequestMapping("/image")
+@RequestMapping("/images")
 public class ImageController {
 
     private String IMAGE_PATH = "/home/robotlife/tempimage/";
@@ -84,6 +86,15 @@ public class ImageController {
 
         }
         return CommonRes.buildError("1", "1");
+    }
+
+    @RequestMapping("/{imageUrl}")
+    public Object getImages(@PathVariable("imageUrl") String imageUrl) {
+
+        File robotlife = LS3Utils.getFileObject("robotlife", "liuyang-avatar.jpg", IMAGE_PATH);
+
+
+        return robotlife;
     }
 
 }

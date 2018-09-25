@@ -1,4 +1,4 @@
-package com.liuyang19900520.robotlife.blog.common.util;
+package com.liuyang19900520.robotlife.blog.shiro;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;

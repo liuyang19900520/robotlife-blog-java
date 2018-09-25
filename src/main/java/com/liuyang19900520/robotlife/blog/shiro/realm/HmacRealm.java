@@ -1,7 +1,7 @@
 package com.liuyang19900520.robotlife.blog.shiro.realm;
 
 
-import com.liuyang19900520.robotlife.blog.common.util.CryptoUtil;
+import com.liuyang19900520.robotlife.blog.shiro.CryptoUtil;
 import com.liuyang19900520.robotlife.blog.domain.user.SysUser;
 import com.liuyang19900520.robotlife.blog.service.auth.AuthenticateService;
 import com.liuyang19900520.robotlife.blog.shiro.token.HmacToken;

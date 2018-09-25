@@ -22,7 +22,7 @@ public class HikariDatabaseConfig {
 
         config.setJdbcUrl("jdbc:mysql://liuyang19900520db.chuuiho8uwp7.ap-northeast-1.rds.amazonaws.com/robotlife?useUnicode=true&characterEncoding=utf-8");
         config.setUsername("liuyang19900520");
-        config.setPassword("LY-052077");
+        config.setPassword("1990052099");
 
         config.setPoolName("HikariDataSourceRobotLifeBlog");
         config.setMinimumIdle(5);
