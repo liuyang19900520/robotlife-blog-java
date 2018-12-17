@@ -5,12 +5,27 @@ spring:
   application:
     name: robotlife-blog
   redis:
-      host: 18.182.147.149
-      port: 6379
-      database: 0
-      lettuce:
-        pool:
-          max-active: 500
-          max-wait: 1ms
-          max-idle: 100
-          min-idle: 20
+    host: 52.199.60.242
+    port: 6379
+    database: 0
+    lettuce:
+      pool:
+        max-active: 500
+        max-wait: 1ms
+        max-idle: 100
+        min-idle: 20
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    port: 10111
+    servlet:
+      context-path: /
+    ssl:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always
