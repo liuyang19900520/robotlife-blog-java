@@ -1,7 +1,6 @@
 package com.liuyang19900520.robotlife.blog.shiro.realm;
 
 
-
 import com.liuyang19900520.robotlife.blog.shiro.CryptoUtil;
 import com.liuyang19900520.robotlife.blog.shiro.token.JwtToken;
 import io.jsonwebtoken.Claims;
@@ -23,6 +22,7 @@ import java.util.Set;
 /**
  * Created by liuyang on 2018/3/18
  */
+
 public class JwtRealm extends AuthorizingRealm {
 
     @Autowired

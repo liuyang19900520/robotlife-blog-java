@@ -189,7 +189,7 @@ public class ShiroConfig {
      *
      * @return
      */
-    @Bean
+    @Bean(name = "shiroCacheManager")
     public CacheManager cacheManager() {
         return new MemoryConstrainedCacheManager();
     }

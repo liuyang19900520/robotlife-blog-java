@@ -4,8 +4,10 @@ server:
 spring:
   application:
     name: robotlife-blog
+    main:
+      allow-bean-definition-overriding: true
   redis:
-    host: 52.199.60.242
+    host: 18.182.226.5
     port: 6379
     database: 0
     lettuce:
@@ -15,7 +17,7 @@ spring:
         max-idle: 100
         min-idle: 20
 
-management:
+manage:
   endpoints:
     web:
       exposure:
