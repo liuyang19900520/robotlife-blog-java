@@ -1,9 +1,9 @@
 package com.liuyang19900520.robotlife.blog.service.auth;
 
 
-import com.liuyang19900520.robotlife.blog.shiro.CryptoUtil;
 import com.liuyang19900520.robotlife.blog.dao.auth.AuthenticateDao;
 import com.liuyang19900520.robotlife.blog.domain.user.SysUser;
+import com.liuyang19900520.robotlife.blog.shiro.CryptoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +55,11 @@ public class AuthenticateServiceImpl implements AuthenticateService {
         String jwt = CryptoUtil.issueJwt(UUID.randomUUID().toString(), userName,
                 rolesJwt, permsJwt, new Date(), CryptoUtil.ACCESS_TOKEN_TYPE);
 
+        String jwtFresh = CryptoUtil.issueJwt(UUID.randomUUID().toString(), userName,
+                rolesJwt, permsJwt, new Date(), CryptoUtil.REFRESH_TOKEN_TYPE);
+
         user.setToken(jwt);
+        user.setRefreshToken(jwtFresh);
 
         return user;
     }

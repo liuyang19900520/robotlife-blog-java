@@ -31,7 +31,7 @@ public class JwtPermAuthFilter extends StatelessFilter {
                 boolean xxx = this.checkPerms(subject, mappedValue);
                 return xxx;
             } catch (AuthenticationException e) {
-                log.error(request.getRemoteHost()+" HMAC鉴权  "+e.getMessage());
+                log.error(request.getRemoteHost() + " HMAC鉴权  " + e.getMessage());
 
             }
 //

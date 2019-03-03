@@ -21,7 +21,6 @@ import com.google.common.collect.Maps;
 import com.liuyang19900520.robotlife.blog.common.pojo.Messages;
 import com.liuyang19900520.robotlife.blog.common.pojo.ResultVo;
 import com.liuyang19900520.robotlife.blog.common.util.LJsonUtils;
-
 import com.liuyang19900520.robotlife.blog.domain.user.SysUser;
 import com.liuyang19900520.robotlife.blog.shiro.token.HmacToken;
 import com.liuyang19900520.robotlife.blog.shiro.token.JwtToken;
@@ -91,10 +90,11 @@ public abstract class StatelessFilter extends AccessControlFilter {
     protected AuthenticationToken createJwtToken(ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
         String jwt = req.getHeader("token");
+        String refreshToken = req.getHeader("refreshToken");
         String host = request.getRemoteHost();
         log.info("authenticate token token:" + jwt);
         System.out.println("token:" + jwt);
-        return new JwtToken(jwt, host);
+        return new JwtToken(jwt, host, refreshToken);
     }
 
     protected boolean checkRoles(Subject subject, Object mappedValue) {

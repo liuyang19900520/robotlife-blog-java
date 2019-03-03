@@ -4,6 +4,7 @@ package com.liuyang19900520.robotlife.blog.shiro.realm;
 import com.liuyang19900520.robotlife.blog.shiro.CryptoUtil;
 import com.liuyang19900520.robotlife.blog.shiro.token.JwtToken;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -58,9 +59,7 @@ public class JwtRealm extends AuthorizingRealm {
                 if (expiration.getTime() < System.currentTimeMillis()) {
                     throw new AuthenticationException("jwt过期");
                 }
-//                if (redisTemplate.boundValueOps(claims.getSubject()).get() != null) {
-//                    throw new AuthenticationException("jwt过期");
-//                }
+
             } else {
                 throw new AuthenticationException("jwt无效");
             }
@@ -68,7 +67,12 @@ public class JwtRealm extends AuthorizingRealm {
         } catch (MalformedJwtException e) {
             throw new AuthenticationException("jwt格式错误");
         } catch (Exception e) {
-            throw new AuthenticationException("jwt无效");
+
+            if (e instanceof ExpiredJwtException) {
+                throw (ExpiredJwtException)e;
+
+            }
+
         }
 
         return new SimpleAuthenticationInfo(verifyToken, Boolean.TRUE, this.getName());

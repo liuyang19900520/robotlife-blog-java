@@ -33,7 +33,8 @@ public class LogAspect {
     ThreadLocal<Long> startTime = new ThreadLocal<Long>();
 
     //申明一个切点 里面是 execution表达式
-    @Pointcut("execution(public * com.liuyang19900520.robotlife.blog.web.controller.*.*(..))")
+    @Pointcut("execution(public * com.liuyang19900520.robotlife.blog.web.controller.*.*(..))" +
+            "！execution(public * com.liuyang19900520.robotlife.blog.web.controller.ImageController.*(..))")
     private void controllerAspect() {
     }
 

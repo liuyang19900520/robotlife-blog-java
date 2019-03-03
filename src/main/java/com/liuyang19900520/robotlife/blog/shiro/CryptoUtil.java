@@ -59,7 +59,7 @@ public class CryptoUtil {
 
         // 有效时间
         if (ACCESS_TOKEN_TYPE.equals(type)) {
-            Date expiration = new Date(issuedAt.getTime() + 30 * 60 * 1000L);
+            Date expiration = new Date(issuedAt.getTime() + 10 * 1000L);
             jwt.setExpiration(expiration);
         }
 
@@ -88,6 +88,16 @@ public class CryptoUtil {
 
         Claims claims = (Claims) parse.getBody();
         String verifyToken = issueJwt(claims.getId(), claims.getSubject(), String.valueOf(claims.get("roles")), String.valueOf(claims.get("perms")), claims.getIssuedAt(), ACCESS_TOKEN_TYPE);
+
+        return verifyToken;
+    }
+
+    public static String verifyFreshToken(String token) {
+        Jwt parse = Jwts.parser()
+                .setSigningKey(SECRET_KEY_JWT).parse(token);
+
+        Claims claims = (Claims) parse.getBody();
+        String verifyToken = issueJwt(claims.getId(), claims.getSubject(), String.valueOf(claims.get("roles")), String.valueOf(claims.get("perms")), claims.getIssuedAt(), REFRESH_TOKEN_TYPE);
 
         return verifyToken;
     }
