@@ -1,11 +1,9 @@
 package com.liuyang19900520.robotlife.blog.common.util.json.spring;
 
 
-
 import com.liuyang19900520.robotlife.blog.common.util.json.CustomerJsonSerializer;
 import com.liuyang19900520.robotlife.blog.common.util.json.JSON;
 import com.liuyang19900520.robotlife.blog.common.util.json.JSONS;
-import com.liuyang19900520.robotlife.blog.common.util.json.CustomerJsonSerializer;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.MethodParameter;
@@ -67,6 +65,7 @@ public class JsonReturnHandler implements HandlerMethodReturnValueHandler, BeanP
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         String json = jsonSerializer.toJson(returnValue);
         response.getWriter().write(json);
+        response.getWriter().close();
     }
 
     @Override

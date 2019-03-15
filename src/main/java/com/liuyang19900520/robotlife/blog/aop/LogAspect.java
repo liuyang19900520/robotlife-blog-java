@@ -3,8 +3,6 @@ package com.liuyang19900520.robotlife.blog.aop;
 
 import com.liuyang19900520.robotlife.blog.common.util.LJsonUtils;
 import com.liuyang19900520.robotlife.blog.common.util.LLoggerUtils;
-import com.liuyang19900520.robotlife.blog.common.util.LJsonUtils;
-import com.liuyang19900520.robotlife.blog.common.util.LLoggerUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -60,5 +58,7 @@ public class LogAspect {
         log.info("Response Contents:" + LJsonUtils.objectToJson(o));
         log.info("Spend Time:" + (System.currentTimeMillis() - startTime.get()));
         log.info("--------------Response----------------");
+
+        ;
     }
 }

@@ -2,6 +2,7 @@ package com.liuyang19900520.robotlife.blog.config;
 
 import com.google.common.collect.Lists;
 import com.liuyang19900520.robotlife.blog.shiro.CredentialsMatcher;
+import com.liuyang19900520.robotlife.blog.shiro.DefaultHeaderSessionManager;
 import com.liuyang19900520.robotlife.blog.shiro.ModularRealmAuthenticator;
 import com.liuyang19900520.robotlife.blog.shiro.StatelessDefaultSubjectFactory;
 import com.liuyang19900520.robotlife.blog.shiro.filter.HmacFilter;
@@ -20,6 +21,7 @@ import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -182,6 +184,15 @@ public class ShiroConfig {
         // 关闭session定时检查，通过setSessionValidationSchedulerEnabled禁用掉会话调度器
         sessionManager.setSessionValidationSchedulerEnabled(false);
         return sessionManager;
+    }
+
+    @Bean
+    public DefaultHeaderSessionManager defaultWebSessionManager() {
+        DefaultHeaderSessionManager defaultHeaderSessionManager = new DefaultHeaderSessionManager();
+        // 设立不使用 调取器验证 session 是否过期 作者使用了 redis ，这里根据SessionDAO实际情况设置
+        defaultHeaderSessionManager.setSessionValidationSchedulerEnabled(false);
+//        defaultHeaderSessionManager.setSessionDAO(sessionDAO);
+        return defaultHeaderSessionManager;
     }
 
     /**

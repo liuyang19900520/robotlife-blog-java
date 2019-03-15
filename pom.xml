@@ -151,13 +151,16 @@
     </dependencies>
 
     <build>
+
         <plugins>
+
             <plugin>
-                <configuration>
-                    <finalName>robotlife-blog-service</finalName>
-                </configuration>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>robotlife-blog-java</finalName>
+                </configuration>
+
             </plugin>
         </plugins>
 

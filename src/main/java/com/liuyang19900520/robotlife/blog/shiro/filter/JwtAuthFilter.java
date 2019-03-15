@@ -88,12 +88,15 @@ public class JwtAuthFilter extends StatelessFilter {
                             String newFresh = CryptoUtil.issueJwt(UUID.randomUUID().toString(), userName,
                                     rolesJwt, permsJwt, new Date(), CryptoUtil.REFRESH_TOKEN_TYPE);
 
-                            ((HttpServletResponse) response).setHeader("token", jwt);
-                            ((HttpServletResponse) response).setHeader("refreshToken", newFresh);
 
                             ((JwtToken) token).setJwt(jwt);
                             subject.login(token);
                             if (subject.isAuthenticated()) {
+
+
+                                ((HttpServletResponse) response).setHeader("username", userName);
+                                ((HttpServletResponse) response).setHeader("token", jwt);
+                                ((HttpServletResponse) response).setHeader("refreshToken", newFresh);
                                 return true;
                             }
                         }
