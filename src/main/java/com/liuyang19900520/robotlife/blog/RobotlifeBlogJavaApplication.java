@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class RobotlifeBlogJavaApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(RobotlifeBlogJavaApplication.class, args);
     }
 }
