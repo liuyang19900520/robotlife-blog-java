@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @program: robotlife-blog-java
  * @description:
@@ -24,7 +26,9 @@ public class CategoryController {
 
     @GetMapping("")
     @JSON(type = Category.class, include = "categoryId,categoryContent,parentId,categoryRank")
-    public Object listCategories(Category category) {
+    public Object listCategories(Category category, HttpServletRequest request) {
+
+        System.out.println(request.getHeaderNames());
         return categoryService.listCategories(category);
     }
 

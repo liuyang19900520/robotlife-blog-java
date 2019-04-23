@@ -26,6 +26,7 @@ import java.util.UUID;
 @Slf4j
 public class JwtAuthFilter extends StatelessFilter {
 
+
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
         if (null != getSubject(request, response)
@@ -61,7 +62,6 @@ public class JwtAuthFilter extends StatelessFilter {
                             throw new AuthenticationException("jwt过期");
                         } else {
                             //生成accessToken
-
                             StringBuffer strRoles = new StringBuffer();
                             StringBuffer strPerms = new StringBuffer();
 
@@ -88,12 +88,9 @@ public class JwtAuthFilter extends StatelessFilter {
                             String newFresh = CryptoUtil.issueJwt(UUID.randomUUID().toString(), userName,
                                     rolesJwt, permsJwt, new Date(), CryptoUtil.REFRESH_TOKEN_TYPE);
 
-
                             ((JwtToken) token).setJwt(jwt);
                             subject.login(token);
                             if (subject.isAuthenticated()) {
-
-
                                 ((HttpServletResponse) response).setHeader("username", userName);
                                 ((HttpServletResponse) response).setHeader("token", jwt);
                                 ((HttpServletResponse) response).setHeader("refreshToken", newFresh);
@@ -103,9 +100,7 @@ public class JwtAuthFilter extends StatelessFilter {
                     } else {
                         throw new AuthenticationException("jwt无效");
                     }
-
                 }
-
                 log.error(e.getMessage(), e);
                 ResultVo.error(Messages.UNAUTHORIZATION
                         , e.getMessage());

@@ -21,7 +21,7 @@ import java.util.Iterator;
 @RequestMapping("/images")
 public class ImageController {
 
-    private String IMAGE_PATH = "/robotlife/tempimage/";
+    private String IMAGE_PATH = "/opt/robotlife/server/tempimage/";
 
     private String URL_PREFIX = "https://s3-ap-northeast-1.amazonaws.com/robotlife/markdown/";
     //private String IMAGE_PATH = SysConstant.IMAGE_PATH;

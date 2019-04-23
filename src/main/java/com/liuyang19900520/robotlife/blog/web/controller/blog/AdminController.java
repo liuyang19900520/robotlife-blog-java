@@ -3,14 +3,10 @@ package com.liuyang19900520.robotlife.blog.web.controller.blog;
 import com.liuyang19900520.robotlife.blog.common.pojo.Messages;
 import com.liuyang19900520.robotlife.blog.common.pojo.ResultVo;
 import com.liuyang19900520.robotlife.blog.domain.blog.Blog;
-import com.liuyang19900520.robotlife.blog.domain.user.SysUser;
 import com.liuyang19900520.robotlife.blog.service.blog.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.Collection;
 
 /**
  * @program: robotlife-blog-service
@@ -20,15 +16,14 @@ import java.util.Collection;
  **/
 @Controller
 @RequestMapping("/admin")
-public class AdminContorller {
+public class AdminController {
 
     @Autowired
     AdminService blogService;
 
     @GetMapping("/index")
     @ResponseBody
-    public Object index(HttpServletResponse response) {
-
+    public Object index() {
 
         return ResultVo.success(Messages.JWT_TOKEN_AUTH_SUCCESS, null);
     }

@@ -83,8 +83,9 @@ public abstract class StatelessFilter extends AccessControlFilter {
     protected boolean isJwtSubmission(ServletRequest request) {
         HttpServletRequest req = (HttpServletRequest) request;
         String jwt = req.getHeader("token");
+        String refreshToken = req.getHeader("refreshToken");
         return (request instanceof HttpServletRequest)
-                && StringUtils.isNotBlank(jwt);
+                && StringUtils.isNotBlank(jwt)&&StringUtils.isNotBlank(refreshToken);
     }
 
     protected AuthenticationToken createJwtToken(ServletRequest request, ServletResponse response) {

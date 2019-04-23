@@ -65,6 +65,7 @@ public class JsonReturnHandler implements HandlerMethodReturnValueHandler, BeanP
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         String json = jsonSerializer.toJson(returnValue);
         response.getWriter().write(json);
+        response.getWriter().flush();
         response.getWriter().close();
     }
 

@@ -3,7 +3,7 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <!-- 定义日志文件 输入位置 -->
     <!--<property name="log_dir" value="C:\\Users\\liuyang19900520\\Desktop\\logs"/>-->
-    <property name="log_dir" value="/robotlife/logs/"/>
+    <property name="log_dir" value="/opt/robotlife/server/logs/"/>
     <!-- 日志最大的历史 30天 -->
     <property name="maxHistory" value="30"/>
     <!-- 日志文件大小 5MB -->
