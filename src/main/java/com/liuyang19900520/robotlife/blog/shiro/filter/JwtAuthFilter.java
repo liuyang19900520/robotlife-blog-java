@@ -93,7 +93,7 @@ public class JwtAuthFilter extends StatelessFilter {
                             if (subject.isAuthenticated()) {
                                 ((HttpServletResponse) response).setHeader("username", userName);
                                 ((HttpServletResponse) response).setHeader("token", jwt);
-                                ((HttpServletResponse) response).setHeader("refreshToken", newFresh);
+                                ((HttpServletResponse) response).setHeader("refreshtoken", newFresh);
                                 return true;
                             }
                         }

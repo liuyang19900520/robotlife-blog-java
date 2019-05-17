@@ -30,14 +30,14 @@ public class AdminController {
 
     @PostMapping("/blogs")
     @ResponseBody
-    public Object writeBlogs(@RequestBody Blog blog) {
+    public Object writeBlogs( Blog blog) {
         return blogService.addBlog(blog) ? "success" : "failed";
     }
 
 
     @PostMapping("/blogs/temp")
     @ResponseBody
-    public Object writeTempBlogs(@RequestBody Blog blog) {
+    public Object writeTempBlogs( Blog blog) {
         return blogService.addTempBlog(blog) ? "success" : "failed";
     }
 

@@ -59,7 +59,7 @@ public class CryptoUtil {
 
         // 有效时间
         if (ACCESS_TOKEN_TYPE.equals(type)) {
-            Date expiration = new Date(issuedAt.getTime() + 5 * 1000L);
+            Date expiration = new Date(issuedAt.getTime() + 5 * 60 * 60 * 1000L);
             jwt.setExpiration(expiration);
         }
 

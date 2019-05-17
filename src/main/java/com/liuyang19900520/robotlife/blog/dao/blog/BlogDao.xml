@@ -28,7 +28,7 @@
         <result column="temp_blog_html" property="blogHtml" jdbcType="LONGVARCHAR"/>
         <result column="temp_tags" property="tags" jdbcType="VARCHAR"/>
         <result column="temp_category_id" property="categoryId" jdbcType="BIGINT"/>
-        <result column="topic_id" property="topicId" jdbcType="BIGINT"/>
+        <result column="temp_topic_id" property="topicId" jdbcType="BIGINT"/>
         <result column="temp_author_id" property="authorId" jdbcType="BIGINT"/>
         <result column="create_at" property="createAt" jdbcType="TIMESTAMP"/>
         <result column="create_by" property="createBy" jdbcType="BIGINT"/>
